@@ -1,0 +1,303 @@
+body{
+	min-width: 100%;
+	min-height: 100%;
+	overflow-x: hidden;
+	color: black;
+	font-family: Optima,Segoe,Segoe UI,Candara,Calibri,Arial,sans-serif;
+}
+
+img{
+	max-width: 100%;
+}
+
+a{
+	text-decoration: none;
+	color: inherit;
+	outline: 0;
+}
+
+.slideout-menu {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 0;
+	width: 256px;
+	-webkit-overflow-scrolling: touch;
+	display: none;
+	background: #3F51B5; /*#e64a19 /*#ff5722;	/*E95839*/
+}
+
+.slideout-panel {
+	position: absolute;
+	z-index: 1;
+	background: #C5CAE9;
+	height: 125%;
+	width: 100%;
+	box-shadow: 3px 0px 10px #B6B6B6;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+	overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+	display: block;
+}
+
+#header{
+	font-family: Optima,Segoe,Segoe UI,Candara,Calibri,Arial,sans-serif;
+	background: #403D99;
+	height: 2.5em;
+	width: 100%;
+	position: fixed;
+}
+
+.toggle-button{
+	border: none;
+	border-radius: 2px;
+	background: #448AFF; /*#7673E5*/
+	font-size: 1.5em;
+	margin-top: 0.2em;
+	margin-left: 0.2em;
+	cursor: pointer;
+	outline: none;
+	color: inherit;
+	display: inline-block;
+}
+
+.logo{
+	width: 4.44444em;
+	float: right;
+}
+
+.menu-item{
+	font: 1.25em/2em Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+	font-weight: 400;
+	text-align: center;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	height: 2em;
+}
+
+.menu-item.mouseover:hover{
+	background: #7673E5;
+}
+
+#name{
+	font-size: 1.3em;
+	font-weight: 600;
+	background: #303F9F;
+}
+
+@media screen and (min-width: 28.75em){
+	#header{
+		height: 3em;
+	}
+	
+	.toggle-button{
+		font-size: 2em;
+		margin-top: 0.15em;
+		margin-left: 0.15em;
+	}
+	
+	.logo{
+		width: 5.33333em;
+	}
+}
+
+@media screen and (min-width: 40.5em){
+	
+	body{
+		/*overflow-y: hidden;*/
+	}
+	
+	#header{
+		width: 0;
+		height: 0;
+	}
+	
+	.toggle-button{
+		margin-top: 0.15em;
+		margin-left: 0.15em;
+		margin-right: 0.15em;
+		padding-bottom: 0.3em;
+	}
+	
+	#draw-button{
+		width: 15em;
+		height: 3em;
+		float: right;
+		margin-top: -47.25em;
+		margin-right: 0.25em;
+		text-align: center;
+		font: 1em/3em Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+		z-index: 2;
+		display: block;
+	}
+
+	/*#facebook{
+		background: #3B5998;
+		width: 20em;
+		height: 5em;
+		border-radius: 15px;
+		text-align: center;
+		font: 1em/5em Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+		padding: 0.5em;
+		margin-left: 70%;
+		margin-top: -45.5em;
+		display: inline-block;
+		color: white;
+		cursor: pointer;
+	}
+
+	#twitter{
+		background: #55ACEE;
+		width: 20em;
+		height: 5em;
+		border-radius: 15px;
+		text-align: center;
+		font: 1em/5em Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+		padding: 0.5em;
+		margin-left: 70%;
+		margin-top: -35.5em;
+		display: inline-block;
+		color: white;
+		cursor: pointer;
+	}*/
+
+}
+
+@media screen and (min-width: 60em){
+	#facebook-tab{
+		width: 30em;
+	}
+	#twitter-tab{
+		width: 30em;
+	}
+
+}
+
+#dataBox{
+	display: none;
+}
+
+#draw{
+	margin-left: 2.5em;
+	/*background: #C5CAE9;*/
+	background-color: #FFF;
+	border: 2px solid #448AFF;
+	display: inline-block;
+}
+
+button{
+	display: block;
+}
+
+.hidden{
+	height: 5em;
+	display: none;
+}
+
+#tab-container{
+	margin-left: 52.7em;
+	margin-top: -52em;
+}
+
+#facebook-tab, #twitter-tab{
+	display: inline-block;
+}
+
+#facebook-tab{
+	background: #3B5998;
+	width: 15.8em;
+	height: 2.5em;
+	font: 1em/2.5em Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+	text-align: center;
+	color: white;
+	transition: 0.5s;
+}
+
+#facebook-tab:hover{
+	background: #2c4271;
+}
+
+#tab-1{
+	background: #3B5998;
+	height: 47.5em;
+	text-align: center;
+	padding-top: 7.5em;
+	padding-left: 35%;
+}
+
+#tab-1 h1{
+	background: white;
+	width: 10em;
+	height: 1.5em;
+	border-radius: 50px;
+	padding-top: 0.5em;
+}
+
+#twitter-tab{
+	background: #55ACEE;
+	width: 15.8em;
+	height: 2.5em;
+	font: 1em/2.5em Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+	text-align: center;
+	color: white;
+	float: right;
+	margin-top: -2.5em;
+	transition: 0.5s;
+}
+
+#twitter-tab:hover{
+	background: #1686dc;
+	transition: 0.5s;
+}
+
+#tab-2{
+	background: #55ACEE;
+	height: 47.5em;
+	text-align: center;
+	padding-top: 100em;
+	padding-left: 35%;
+}
+
+#tab-2 h1{
+	background: white;
+	width: 10em;
+	height: 1.5em;
+	border-radius: 50px;
+	padding-top: 0.5em;
+}
+
+#facebook, #twitter{
+	cursor: pointer;
+}
+
+#profilePic
+{
+	border-color: red;
+	border-width: 1.5em;
+	width: 100px;
+	height: 100px;
+}
+
+
+div.wrap {
+    border: 1px solid #000000;
+    overflow: auto;
+}
+div.one {
+	width: 800px;
+    border: 1px solid #AAAAAA;
+    float: left;
+}
+div.two {
+    background-color: #DDDDDD;
+    height: 300px;
+    float: right;
+}

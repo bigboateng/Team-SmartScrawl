@@ -1,0 +1,209 @@
+body{
+	min-width: 100%;
+	min-height: 100%;
+	overflow-x: hidden;
+	color: white;
+	font-family: Optima,Segoe,Segoe UI,Candara,Calibri,Arial,sans-serif;
+}
+
+img{
+	max-width: 100%;
+}
+
+a{
+	text-decoration: none;
+	color: inherit;
+	outline: 0;
+}
+
+.slideout-menu {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 0;
+	width: 256px;
+	-webkit-overflow-scrolling: touch;
+	display: none;
+	background: #303F9F; /*#e64a19 #ff5722	E95839*/
+}
+
+.slideout-panel {
+	position: absolute;
+	z-index: 1;
+	background: #fff;
+	/*height: 200%;*/
+	width: 100%;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+	overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+	display: block;
+}
+
+#header{
+	font-family: Optima,Segoe,Segoe UI,Candara,Calibri,Arial,sans-serif;
+	background: #403D99;
+	height: 2.5em;
+	width: 100%;
+	position: fixed;
+}
+
+.toggle-button{
+	border: none;
+	border-radius: 2px;
+	background: #7673E5;
+	font-size: 1.5em;
+	margin-top: 0.2em;
+	margin-left: 0.2em;;
+	cursor: pointer;
+	outline: none;
+	color: inherit;
+}
+
+.logo{
+	width: 4.44444em;
+	float: right;
+}
+
+/*#placeholder{
+	display: block;
+	margin-top: 2.5em;
+}*/
+
+.menu-item{
+	font: 1.25em/2em Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+	font-weight: 400;
+	text-align: center;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	height: 2em;
+}
+
+.menu-item.mouseover:hover{
+	background: #7673E5;
+}
+
+#name{
+	font-size: 1.3em;
+	font-weight: 600;
+}
+
+/*#description{
+	color: white;
+	font-family: Optima,Segoe,Segoe UI,Candara,Calibri,Arial,sans-serif;
+	background: #7673E5;
+	padding: 0.5em;
+}
+
+#draw-button{
+	background: #2B2966;
+	height: 3em;
+	display: none;
+}*/
+
+@media screen and (min-width: 28.75em){
+	#header{
+		height: 3em;
+	}
+	
+	.toggle-button{
+		font-size: 2em;
+		margin-top: 0.15em;
+		margin-left: 0.15em;
+	}
+	
+	.logo{
+		width: 5.33333em;
+	}
+}
+
+@media screen and (min-width: 40.5em){
+	
+	body{
+		overflow-y: hidden;
+	}
+	
+	#header{
+		width: 0;
+		height: 0;
+	}
+	
+	.toggle-button{
+		margin-top: 0.15em;
+		margin-left: 0.15em;
+	}
+	
+	/*#bg {
+		position: fixed;
+		top: -50%;
+		left: -50%;
+		width: 200%; 
+		height: 200%;
+		z-index: -1;
+}
+	
+	#placeholder{
+		/*position: fixed;
+		top: 0;
+		left: 0;
+		min-width: 100%;
+		min-height: 100%; *
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		min-width: 50%;
+		min-height: 50%;
+	}
+	
+	#description{
+		padding-top: 15%;
+		padding-bottom: 25%;
+		padding-left: 5%;
+		height: 100%;
+		width: 100%;
+		background-color: rgba(255,255,255,0.3);
+		color: white;
+	}
+	
+	#text{
+		background-color: rgba(118,115,229,5);
+		width: 87%;
+		font-size: 1.5em;
+		padding: 0.5em;
+	}
+	
+	#draw-button{
+		width: 15em;
+		height: 3em;
+		float: right;
+		margin-top: -47.25em;
+		margin-right: 0.25em;
+		text-align: center;
+		font: 1em/3em Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+		z-index: 2;
+		display: block;
+	}*/
+	
+	
+	
+}
+
+/*#logo{
+	font-family: Optima,Segoe,Segoe UI,Candara,Calibri,Arial,sans-serif;
+	font-size: 3em;
+	height: 4.6em;
+	text-align: center;
+	margin-top: 2.5em;
+}*/
+
+

@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>Canvas | Smart Scrawl</title>
+		
+		<!-- Stylesheets -->
+		<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
+		<link rel="stylesheet" href="/stylesheets/draw.css" type="text/css">
+		<link rel="stylesheet" href="/semantic/dist/semantic.min.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css">
+	
+		
+		<!-- Socket Script for canvas info -->
+		<script src="/socket.io/socket.io.js" type="text/javascript"></script>
+
+		<!-- Jquery libs -->
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+
+		<!-- Slideout menu libs -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/0.1.9/slideout.min.js" type="text/javascript"></script>
+		<script src="/scripts/slideout-jquery.js" type="text/javascript"></script>
+
+		<!-- Canvas save amongst others -->
+		<script src="/scripts/login_scripts.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/stylesheets/w3.css">
+
+		<!-- Tabbed login menu libs -->
+		<script src="/scripts/jquery.hashchange.min.js" type="text/javascript"></script>
+		<script src="/scripts/jquery.easytabs.min.js" type="text/javascript"></script>
+		<script src="/semantic/dist/semantic.min.js" type="text/javascript"></script>
+			<!-- w3 css -->
+		
+
+		<script type="text/javascript"> 
+  			$(document).ready(function(){ $('#tab-container').easytabs(); });
+		</script>
+	</head>
+	
+	<body>
+
+		<nav id="menu">
+			<header>
+				<h1 class="menu-item" id="name">Smart Scrawl</h1>
+				<a href="http://www.ljcoding.com/mobile/VirtualTag/Website/html/index.html">
+					<h3 class="menu-item mouseover">Home</h3>
+				</a>
+				<a href="#">
+					<h3 class="menu-item mouseover">About Us</h3>
+				</a>
+				<a href="play.minipixel.net:5001">
+					<h3 class="menu-item mouseover">Draw</h3>
+				</a>
+				<a href="http://www.ljcoding.com/mobile/VirtualTag/Website/html/map.html">
+					<h3 class="menu-item mouseover">View Tags</h3>
+				</a>
+			</header>
+		</nav>
+		
+		<main id="panel">
+			<header id="header">
+				<button class="toggle-button" accesskey="m">&#x2261;</button>
+				<!--<div class="logo">
+					<img src="#">
+				</div>-->
+			</header>
+
+			<p id="dataBox"></p>
+
+			<canvas id="draw" width="800" height="800" name="drawCanvas"></canvas>
+
+			<button class="ui primary button" id="show-dialog">Save</button> 
+
+			<!--<div id="facebook" onclick="loginFacebook();">Login with Facebook to save your VirtualTag</div>
+			<div id="twitter" onclick="loginTwitter();">Login with Twitter to save your VirtualTag</div>-->
+
+			<!-- <button id="show-dialog">Test</button> -->
+
+			<div id="dialog" class="hidden">
+				<form name="Cform">
+					<input type="text" name="Cinput">
+				</form>
+			</div>
+
+
+		<script>
+		var lastPoint = {x: 400, y:400}
+		var savedYaw = 0;
+		var points = [];
+		var pointArray = [];
+		var index = 0;
+
+		var socket = io.connect('http://play.minipixel.net');
+	  	socket.on('data', function (data) {
+	    	document.getElementById("dataBox").innerHTML = JSON.stringify(data);
+	    	var c = document.getElementById("draw");
+			var ctx = c.getContext("2d");
+
+	    	if(data["calibrate"] == 1) {
+	    		savedYaw = data["yaw"];
+	    	}
+
+	    	if(data["clear"] == 1) {
+	    		ctx.clearRect(0, 0, c.width, c.height);
+	    	}
+
+	    	if(data["drawing"] == 1) {
+	    		index++;
+
+	    		if(index%2 != 0) {
+					ctx.lineWidth = 10;
+					ctx.lineJoin = 'round';
+					ctx.lineCap = 'round';
+					ctx.strokeStyle = data["color"];		
+
+					var yPoint = map(data["yaw"]-savedYaw, -90, 90, 0, 800);
+					var xPoint = map(data["pitch"], -90, 90, 0, 800);
+
+					points.push(xPoint);
+					points.push(yPoint);
+					pointArray.push({
+						x: xPoint,
+						y: yPoint,
+						radius: getRandomInt(10,30),
+						opacity: Math.random()
+					});
+
+					 pointArray.push({ 
+					    x: xPoint, 
+					    y: yPoint, 
+					    angle: getRandomInt(0, 180),
+					    width: getRandomInt(1,10),
+					    opacity: Math.random(),
+					    scale: getRandomInt(1, 20) / 10,
+					    color: ('rgb('+getRandomInt(0,255)+','+getRandomInt(0,255)+','+getRandomInt(0,255)+')')
+					  });
+
+					//console.log(xPoint + " - " + yPoint);
+
+
+							//effect 2 -> Edge smoothing with radial gradient
+					
+					   // end of setting 2
+
+					  
+					if(data["effect"] == 0){
+							if(points.length > 3) {
+							//effect 0 - default
+							ctx.beginPath();
+							ctx.moveTo(points[points.length-3], points[points.length-2]);
+							ctx.bezierCurveTo(points[points.length-9], points[points.length-8], points[points.length-7], points[points.length-6], points[points.length-9], points[points.length-8]);
+							ctx.stroke();
+						}
+
+					}else if (data["effect"] == 1){
+					// effect 1 - shadow blue
+					ctx.shadowBlur = 10;
+					ctx.shadowColor = 'rgb(0, 0, 0)';
+						if(points.length > 3) {
+							//effect 0 - default
+							ctx.beginPath();
+							ctx.moveTo(points[points.length-3], points[points.length-2]);
+							ctx.bezierCurveTo(points[points.length-9], points[points.length-8], points[points.length-7], points[points.length-6], points[points.length-9], points[points.length-8]);
+							ctx.stroke();
+						}
+					}else if(data["effect"] == 2){
+							 var radgrad = ctx.createRadialGradient(
+					      xPoint,yPoint,10,xPoint,yPoint,20);
+					    
+					    radgrad.addColorStop(0, '#000');
+					    radgrad.addColorStop(0.5, 'rgba(0,0,0,0.5)');
+					    radgrad.addColorStop(1, 'rgba(0,0,0,0)');
+					    ctx.fillStyle = radgrad;
+					    
+					    ctx.fillRect(xPoint-20, yPoint-20, 40, 40);
+					}else if(data["effect"] == 3){
+					// add styles
+						  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+							  for (var i = 0; i < pointArray.length; i++) {
+							    drawStar(points[i]);
+							  }
+
+					// end of stars style
+					}
+
+
+
+
+
+
+				
+					lastPoint.x = xPoint;
+					lastPoint.y = yPoint;
+	    		}
+	    	} else if(data["drawing"] == 0) {
+	    		points = [];
+	    	}
+
+
+
+
+	    function drawStar(options) {
+		  var length = 15;
+		  ctx.save();
+		  ctx.translate(options.x, options.y);
+		  ctx.beginPath();
+		  ctx.globalAlpha = options.opacity;
+		  ctx.rotate(Math.PI / 180 * options.angle);
+		  ctx.scale(options.scale, options.scale);
+		  ctx.strokeStyle = options.color;
+		  ctx.lineWidth = options.width;
+		  for (var i = 5; i--;) {
+		    ctx.lineTo(0, length);
+		    ctx.translate(0, length);
+		    ctx.rotate((Math.PI * 2 / 10));
+		    ctx.lineTo(0, -length);
+		    ctx.translate(0, -length);
+		    ctx.rotate(-(Math.PI * 6 / 10));
+		  }
+		  ctx.lineTo(0, length);
+		  ctx.closePath();
+		  ctx.stroke();
+		  ctx.restore();
+		}
+
+
+
+		});
+
+	  	function map(x, in_min, in_max, out_min, out_max) {
+	  		return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+	  	}
+
+	  function getRandomInt(min, max) {
+  		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	</script>
+
+		</main>
+		
+	</body>
+	
+</html>
